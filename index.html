@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Data Science Hub | Comprehensive Data Science Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Poppins:wght@600;700&display=stylesheet" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            /* Day Mode */
+            --primary: #10B981; /* Emerald green for vibrancy */
+            --secondary: #7C3AED; /* Vivid purple for creativity */
+            --accent: #F43F5E; /* Rose for warmth */
+            --background: #ECFEFF; /* Light cyan for freshness */
+            --text-light: #1E293B; /* Dark slate for readability */
+            --text-dark: #0F172A; /* Deep slate for emphasis */
+            --glass: rgba(255, 255, 255, 0.9); /* Subtle glass effect */
+            --glass-hover: rgba(255, 255, 255, 0.95);
+            --shadow: rgba(16, 185, 129, 0.3); /* Green shadow */
+            --glow: rgba(124, 58, 237, 0.4); /* Purple glow */
+            --highlight: #34D399; /* Lighter emerald */
+            --neutral: #6B7280; /* Neutral gray */
+            --card-bg: rgba(255, 255, 255, 0.98);
+        }
+
+        [data-theme="night"] {
+            --primary: #8B5CF6; /* Soft purple */
+            --secondary: #F472B6; /* Bright magenta */
+            --accent: #FBBF24; /* Amber glow */
+            --background: #1E1B4B; /* Deep indigo */
+            --text-light: #E5E7EB;
+            --text-dark: #0F172A;
+            --glass: rgba(30, 27, 75, 0.9);
+            --glass-hover: rgba(30, 27, 75, 0.95);
+            --shadow: rgba(139, 92, 246, 0.35);
+            --glow: rgba(244, 114, 182, 0.45);
+            --highlight: #A78BFA;
+            --neutral: #9CA3AF;
+            --card-bg: rgba(30, 27, 75, 0.92);
+        }
+
+        [data-theme="twilight"] {
+            --primary: #3B82F6; /* Bright blue */
+            --secondary: #EC4899; /* Vivid pink */
+            --accent: #F59E0B; /* Warm amber */
+            --background: #2D1B4E; /* Deep purple */
+            --text-light: #E5E7EB;
+            --text-dark: #0F172A;
+            --glass: rgba(59, 130, 246, 0.3);
+            --glass-hover: rgba(59, 130, 246, 0.4);
+            --shadow: rgba(59, 130, 246, 0.35);
+            --glow: rgba(236, 72, 153, 0.45);
+            --highlight: #60A5FA;
+            --neutral: #9CA3AF;
+            --card-bg: rgba(45, 27, 78, 0.92);
+        }
+
+        [data-theme="aurora"] {
+            --primary: #06B6D4; /* Cyan blue */
+            --secondary: #F87171; /* Coral red */
+            --accent: #FCD34D; /* Golden yellow */
+            --background: #E0F2FE; /* Light sky blue */
+            --text-light: #1E293B;
+            --text-dark: #0F172A;
+            --glass: rgba(6, 182, 212, 0.3);
+            --glass-hover: rgba(6, 182, 212, 0.4);
+            --shadow: rgba(6, 182, 212, 0.3);
+            --glow: rgba(248, 113, 113, 0.4);
+            --highlight: #22D3EE;
+            --neutral: #6B7280;
+            --card-bg: rgba(255, 255, 255, 0.98);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text-light);
+            overflow-x: hidden;
+            transition: background 0.4s ease, color 0.4s ease;
+            line-height: 1.6;
+        }
+
+        .cyber-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, var(--glow) 0%, var(--background) 70%);
+            overflow: hidden;
+        }
+
+        .circuit {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            opacity: 0.15;
+            animation: circuitFlow 20s ease-in-out infinite;
+        }
+
+        @keyframes circuitFlow {
+            0% { transform: translate(0, 0); opacity: 0.15; }
+            50% { transform: translate(40px, 40px); opacity: 0.25; }
+            100% { transform: translate(0, 0); opacity: 0.15; }
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: var(--highlight);
+            border-radius: 50%;
+            opacity: 0.9;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        .small-star { width: 2px; height: 2px; animation-duration: 2.5s; }
+        .medium-star { width: 4px; height: 4px; animation-duration: 3.5s; }
+        .large-star { width: 6px; height: 6px; animation-duration: 4.5s; }
+
+        @keyframes twinkle {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.5); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+
+        .data-particle {
+            position: absolute;
+            background: var(--glow);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: stream 10s infinite linear;
+        }
+
+        @keyframes stream {
+            0% { transform: translateY(0) translateX(0); opacity: 0.6; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-150vh) translateX(20px); opacity: 0.4; }
+        }
+
+        .mode-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 2px solid var(--secondary);
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .mode-toggle:hover {
+            background: var(--secondary);
+            transform: scale(1.2) rotate(15deg);
+            box-shadow: 0 5px 20px var(--glow);
+        }
+
+        .mode-toggle i {
+            font-size: 1.6rem;
+            color: var(--text-light);
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 1;
+            padding-bottom: 120px;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 150px 20px 90px;
+            position: relative;
+        }
+
+        .hero-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(3.2rem, 8.5vw, 5.5rem);
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--text-light), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGlow 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { filter: drop-shadow(0 0 10px var(--glow)); }
+            100% { filter: drop-shadow(0 0 25px var(--accent)); }
+        }
+
+        .hero-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            opacity: 0.85;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .hero-description {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            opacity: 0.8;
+            max-width: 950px;
+            margin: 0 auto 50px;
+            color: var(--text-light);
+            animation: fadeInUp 1s ease 0.7s both;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .section {
+            margin-bottom: 90px;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2.2rem, 5vw, 2.8rem);
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 45px;
+            text-align: center;
+            position: relative;
+            animation: slideIn 0.9s ease;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 90px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 4px;
+        }
+
+        .knowledge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        .knowledge-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(25px);
+            border: 2px solid var(--neutral);
+            border-radius: 25px;
+            padding: 35px;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 10px 30px var(--shadow);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .knowledge-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 20px 40px var(--shadow);
+            border-color: var(--secondary);
+        }
+
+        .knowledge-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--highlight));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s ease;
+        }
+
+        .knowledge-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .knowledge-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .knowledge-icon {
+            font-size: 2.5rem;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px var(--glow);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .knowledge-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .knowledge-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.9;
+            color: var(--text-light);
+        }
+
+        .knowledge-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--secondary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s ease;
+        }
+
+        .knowledge-link:hover {
+            color: var(--highlight);
+            transform: translateX(10px);
+        }
+
+        .detail-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            z-index: 1002;
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .detail-container {
+            background: linear-gradient(135deg, var(--card-bg), var(--glow));
+            border: 2px solid var(--secondary);
+            border-radius: 25px;
+            padding: 45px;
+            max-width: 1100px;
+            width: 95%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 35px var(--shadow);
+            position: relative;
+            color: var(--text-light);
+            animation: fadeInUp 0.7s ease;
+            scrollbar-width: thin;
+            scrollbar-color: var(--secondary) var(--glass);
+        }
+
+        .detail-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .detail-container::-webkit-scrollbar-track {
+            background: var(--glass);
+        }
+
+        .detail-container::-webkit-scrollbar-thumb {
+            background: var(--secondary);
+            border-radius: 4px;
+        }
+
+        .detail-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .detail-content {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(0.95rem, 2.3vw, 1.1rem);
+            line-height: 2;
+            color: var(--text-light);
+        }
+
+        .detail-section {
+            margin-bottom: 35px;
+            padding: 25px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.12);
+            transition: background 0.5s ease;
+        }
+
+        .detail-section:hover {
+            background: rgba(255, 255, 255, 0.22);
+        }
+
+        .detail-subheader {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.4rem, 3vw, 1.6rem);
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .detail-subheader::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: var(--secondary);
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            border-radius: 3px;
+        }
+
+        .detail-list {
+            list-style-type: none;
+            padding-left: 25px;
+        }
+
+        .detail-list li {
+            position: relative;
+            margin-bottom: 15px;
+            padding-left: 25px;
+            font-size: clamp(0.9rem, 2.2vw, 1rem);
+            line-height: 1.9;
+            transition: color 0.4s ease;
+        }
+
+        .detail-list li:hover {
+            color: var(--secondary);
+        }
+
+        .detail-list li::before {
+            content: '➤';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+
+        .detail-list li strong {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: var(--highlight);
+            border: none;
+            padding: 14px 30px;
+            border-radius: 14px;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 25px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .close-btn:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 30px var(--glow);
+        }
+
+        footer {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-top: 2px solid var(--secondary);
+            padding: 30px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-top: 70px;
+        }
+
+        footer a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.4s ease;
+        }
+
+        footer a:hover {
+            color: var(--highlight);
+        }
+
+        @media (max-width: 1024px) {
+            .hero { padding: 130px 15px 70px; }
+            .hero-title { font-size: clamp(2.8rem, 7.5vw, 4.5rem); }
+            .knowledge-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+            .detail-container { padding: 35px; max-width: 900px; max-height: 90vh; }
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 110px 15px 60px; }
+            .hero-title { font-size: clamp(2.2rem, 6.5vw, 4rem); }
+            .section-title { font-size: clamp(2rem, 5vw, 2.5rem); }
+            .detail-container { padding: 30px; max-width: 95%; }
+        }
+
+        @media (max-width: 480px) {
+            .knowledge-grid { grid-template-columns: 1fr; }
+            .knowledge-card { padding: 30px; }
+            .knowledge-title { font-size: 1.6rem; }
+            .detail-container { padding: 25px; max-width: 95%; }
+            .detail-title { font-size: clamp(1.6rem, 4.5vw, 2rem); }
+            .close-btn { padding: 12px 25px; font-size: 1rem; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.7s ease both;
+        }
+    </style>
+</head>
+<body data-theme="day">
+    <div class="cyber-background">
+        <div class="circuit"></div>
+        <div class="stars" id="stars"></div>
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <div class="mode-toggle" onclick="cycleTheme()">
+        <i class="fas fa-sun"></i>
+    </div>
+
+    <div class="main-container">
+        <section class="hero">
+            <h1 class="hero-title">Data Science Hub</h1>
+            <p class="hero-subtitle">Your Ultimate Data Science Learning Platform</p>
+            <p class="hero-description">Dive into the world of data science with expertly curated resources, from foundational concepts to advanced techniques, guided by Miss Fathia Shodipe, a student of the University of Ilorin.</p>
+        </section>
+
+        <div class="container">
+            <section class="section" id="fundamentals">
+                <h2 class="section-title">Data Science Fundamentals</h2>
+                <div class="knowledge-grid">
+                    <div class="knowledge-card fade-in-up" data-knowledge="data-basics">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-database"></i></div>
+                            <h3 class="knowledge-title">Data Basics & Statistics</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Master data types, statistical measures, and probability to build a strong foundation for data analysis.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('data-basics')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="programming">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-code"></i></div>
+                            <h3 class="knowledge-title">Programming for Data Science</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Learn Python and R for data manipulation, visualization, and analysis with libraries like Pandas and NumPy.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('programming')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="data-wrangling">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-filter"></i></div>
+                            <h3 class="knowledge-title">Data Wrangling</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Clean, transform, and prepare raw data for analysis using tools like Pandas and SQL.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('data-wrangling')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="visualization">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-chart-line"></i></div>
+                            <h3 class="knowledge-title">Data Visualization</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Create impactful visualizations with Matplotlib, Seaborn, and Tableau to communicate insights.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('visualization')">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="machine-learning">
+                <h2 class="section-title">Machine Learning</h2>
+                <div class="knowledge-grid">
+                    <div class="knowledge-card fade-in-up" data-knowledge="ml-basics">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-brain"></i></div>
+                            <h3 class="knowledge-title">Machine Learning Basics</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Understand supervised, unsupervised, and reinforcement learning with practical examples.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('ml-basics')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="regression-classification">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-chart-bar"></i></div>
+                            <h3 class="knowledge-title">Regression & Classification</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Explore linear regression, logistic regression, and algorithms like SVM and Random Forest.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('regression-classification')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="deep-learning">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-network-wired"></i></div>
+                            <h3 class="knowledge-title">Deep Learning</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Dive into neural networks, CNNs, and RNNs using TensorFlow and PyTorch.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('deep-learning')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="model-evaluation">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-check-circle"></i></div>
+                            <h3 class="knowledge-title">Model Evaluation & Tuning</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Learn metrics like accuracy, precision, and techniques like cross-validation and hyperparameter tuning.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('model-evaluation')">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="tools-technologies">
+                <h2 class="section-title">Tools & Technologies</h2>
+                <div class="knowledge-grid">
+                    <div class="knowledge-card fade-in-up" data-knowledge="python-libraries">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-laptop-code"></i></div>
+                            <h3 class="knowledge-title">Python Libraries</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Master Pandas, NumPy, Scikit-learn, and more for efficient data science workflows.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('python-libraries')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="sql-databases">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-server"></i></div>
+                            <h3 class="knowledge-title">SQL & Databases</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Query and manage data with SQL, PostgreSQL, and MySQL for large-scale analysis.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('sql-databases')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="big-data">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-cloud"></i></div>
+                            <h3 class="knowledge-title">Big Data Technologies</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Explore Hadoop, Spark, and Kafka for processing massive datasets.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('big-data')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="cloud-platforms">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                            <h3 class="knowledge-title">Cloud Platforms</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Leverage AWS, Azure, and Google Cloud for scalable data science solutions.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('cloud-platforms')">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="advanced-topics">
+                <h2 class="section-title">Advanced Data Science Topics</h2>
+                <div class="knowledge-grid">
+                    <div class="knowledge-card fade-in-up" data-knowledge="time-series">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-clock"></i></div>
+                            <h3 class="knowledge-title">Time Series Analysis</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Analyze temporal data with ARIMA, LSTM, and Prophet for forecasting trends.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('time-series')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="nlp">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-language"></i></div>
+                            <h3 class="knowledge-title">Natural Language Processing</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Process text data with tokenization, sentiment analysis, and models like BERT.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('nlp')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="computer-vision">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-eye"></i></div>
+                            <h3 class="knowledge-title">Computer Vision</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Build image recognition and object detection systems using OpenCV and YOLO.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('computer-vision')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="reinforcement-learning">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-robot"></i></div>
+                            <h3 class="knowledge-title">Reinforcement Learning</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Develop intelligent agents with Q-learning and Deep Q-Networks for decision-making.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('reinforcement-learning')">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="resources-learning">
+                <h2 class="section-title">Resources & Learning</h2>
+                <div class="knowledge-grid">
+                    <div class="knowledge-card fade-in-up" data-knowledge="kaggle-datasets">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-file-alt"></i></div>
+                            <h3 class="knowledge-title">Kaggle & Datasets</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Access datasets and compete in challenges on Kaggle to build real-world skills.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('kaggle-datasets')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="online-courses">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-graduation-cap"></i></div>
+                            <h3 class="knowledge-title">Online Courses</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Explore courses on Coursera, edX, and Udemy for structured data science learning.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('online-courses')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="communities">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-users"></i></div>
+                            <h3 class="knowledge-title">Data Science Communities</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Join communities like Reddit’s r/datascience and Kaggle forums for collaboration.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('communities')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="books">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-book"></i></div>
+                            <h3 class="knowledge-title">Recommended Books</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Read top books like "Python for Data Analysis" to deepen your expertise.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('books')">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="career-paths">
+                <h2 class="section-title">Career Paths in Data Science</h2>
+                <div class="knowledge-grid">
+                    <div class="knowledge-card fade-in-up" data-knowledge="data-analyst">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-chart-pie"></i></div>
+                            <h3 class="knowledge-title">Data Analyst</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Focus on data interpretation, visualization, and reporting to drive business decisions.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('data-analyst')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="data-scientist">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-flask"></i></div>
+                            <h3 class="knowledge-title">Data Scientist</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Build predictive models and uncover insights using advanced analytics and ML.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('data-scientist')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="ml-engineer">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-cogs"></i></div>
+                            <h3 class="knowledge-title">Machine Learning Engineer</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Design and deploy scalable ML systems for production environments.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('ml-engineer')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="data-engineer">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-tools"></i></div>
+                            <h3 class="knowledge-title">Data Engineer</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Build data pipelines and infrastructure for large-scale data processing.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('data-engineer')">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="detail-overlay" id="detailOverlay">
+            <div class="detail-container" id="detailContainer">
+                <h3 class="detail-title" id="detailTitle"></h3>
+                <div class="detail-content" id="detailContent"></div>
+                <button class="close-btn" onclick="closeDetail()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Crafted with dedication by <a href="https://wa.me/+2348128197651" target="_blank">Sisco Ask</a> | Guided by <a href="#" target="_blank">Miss Fathia Shodipe, a student of the University of Ilorin</a> | © <span id="footer-year"></span>
+    </footer>
+
+    <script>
+        const knowledgeDetails = {
+            'data-basics': {
+                title: 'Data Basics & Statistics',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Build a strong foundation in data types, statistical measures, and probability essential for data science.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Data Types</strong>: Numerical, categorical, ordinal (e.g., 80% of datasets are mixed).</li>
+                            <li><strong>Descriptive Statistics</strong>: Mean, median, mode, variance, and standard deviation.</li>
+                            <li><strong>Probability</strong>: Bayes’ theorem and conditional probability for predictions.</li>
+                            <li><strong>Distributions</strong>: Normal, binomial, Poisson for modeling data behavior.</li>
+                            <li><strong>Hypothesis Testing</strong>: P-values, t-tests, ANOVA for validating insights.</li>
+                            <li><strong>Correlation</strong>: Pearson and Spearman coefficients for relationships.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Business Analytics</strong>: Summarizing sales trends with descriptive stats.</li>
+                            <li><strong>Healthcare</strong>: Predicting outbreaks using probability models.</li>
+                            <li><strong>Marketing</strong>: A/B testing for campaign optimization.</li>
+                            <li><strong>Finance</strong>: Risk analysis with statistical models.</li>
+                            <li><strong>Social Sciences</strong>: Analyzing survey data with hypothesis testing.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes lay the foundation for data science mastery.</p>
+                    </div>
+                `
+            },
+            'programming': {
+                title: 'Programming for Data Science',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Master Python and R to manipulate, analyze, and visualize data effectively.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Python</strong>: Dominant language for data science (used by 70% of professionals, Stack Overflow).</li>
+                            <li><strong>R</strong>: Specialized for statistical analysis and visualization.</li>
+                            <li><strong>Libraries</strong>: Pandas, NumPy, SciPy for data manipulation.</li>
+                            <li><strong>Scripting</strong>: Automating data tasks with Python scripts.</li>
+                            <li><strong>Version Control</strong>: Git and GitHub for collaborative coding.</li>
+                            <li><strong>Jupyter Notebooks</strong>: Interactive coding for data exploration.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Data Analysis</strong>: Processing datasets with Pandas dataframes.</li>
+                            <li><strong>Visualization</strong>: Creating plots with Matplotlib and ggplot2.</li>
+                            <li><strong>Automation</strong>: Building ETL pipelines with Python.</li>
+                            <li><strong>Collaboration</strong>: Managing projects on GitHub.</li>
+                            <li><strong>Prototyping</strong>: Using Jupyter for rapid experimentation.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes empower coding proficiency.</p>
+                    </div>
+                `
+            },
+            'data-wrangling': {
+                title: 'Data Wrangling',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Learn to clean, transform, and prepare raw data for analysis using modern tools.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Data Cleaning</strong>: Handling missing values (e.g., 30% of datasets have missing data).</li>
+                            <li><strong>Data Transformation</strong>: Normalizing, encoding, and scaling data.</li>
+                            <li><strong>ETL Processes</strong>: Extract, Transform, Load pipelines.</li>
+                            <li><strong>SQL Queries</strong>: Aggregating data with JOIN, GROUP BY, and subqueries.</li>
+                            <li><strong>Data Merging</strong>: Combining datasets with Pandas merge.</li>
+                            <li><strong>Data Validation</strong>: Ensuring data integrity and consistency.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>E-commerce</strong>: Cleaning customer data for segmentation.</li>
+                            <li><strong>Finance</strong>: Transforming transaction data for fraud detection.</li>
+                            <li><strong>Healthcare</strong>: Merging patient records with SQL.</li>
+                            <li><strong>Marketing</strong>: Preparing campaign data for analysis.</li>
+                            <li><strong>Research</strong>: Validating experimental data for accuracy.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes streamline data preparation.</p>
+                    </div>
+                `
+            },
+            'visualization': {
+                title: 'Data Visualization',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Create compelling visualizations to communicate data insights effectively.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Matplotlib</strong>: Customizable plots for data science (used in 60% of projects).</li>
+                            <li><strong>Seaborn</strong>: High-level visualizations for statistical data.</li>
+                            <li><strong>Tableau</strong>: Interactive dashboards for business intelligence.</li>
+                            <li><strong>Plot Types</strong>: Bar, line, scatter, heatmaps, and box plots.</li>
+                            <li><strong>Best Practices</strong>: Color theory, accessibility, and clarity.</li>
+                            <li><strong>Interactivity</strong>: Adding hover effects and filters in dashboards.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Business Reporting</strong>: Sales dashboards with Tableau.</li>
+                            <li><strong>Science</strong>: Visualizing experiments with Seaborn.</li>
+                            <li><strong>Marketing</strong>: Campaign ROI with interactive plots.</li>
+                            <li><strong>Finance</strong>: Stock trends with Matplotlib.</li>
+                            <li><strong>Education</strong>: Visualizing student performance metrics.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes enhance visualization skills.</p>
+                    </div>
+                `
+            },
+            'ml-basics': {
+                title: 'Machine Learning Basics',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Understand the core concepts of machine learning with practical examples.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Supervised Learning</strong>: Predicting with labeled data (e.g., regression, classification).</li>
+                            <li><strong>Unsupervised Learning</strong>: Clustering and dimensionality reduction.</li>
+                            <li><strong>Reinforcement Learning</strong>: Learning through rewards (e.g., game AI).</li>
+                            <li><strong>Algorithms</strong>: K-means, decision trees, k-NN, and SVM.</li>
+                            <li><strong>Applications</strong>: 80% of companies use ML for analytics (Gartner).</li>
+                            <li><strong>Data Splitting</strong>: Train-test-validation splits for model training.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Retail</strong>: Customer segmentation with clustering.</li>
+                            <li><strong>Healthcare</strong>: Disease prediction with supervised models.</li>
+                            <li><strong>Gaming</strong>: AI agents with reinforcement learning.</li>
+                            <li><strong>Finance</strong>: Fraud detection with anomaly detection.</li>
+                            <li><strong>Marketing</strong>: Churn prediction with classification.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes introduce machine learning.</p>
+                    </div>
+                `
+            },
+            'regression-classification': {
+                title: 'Regression & Classification',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Master regression and classification algorithms for predictive modeling.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Linear Regression</strong>: Predicting continuous outcomes (e.g., house prices).</li>
+                            <li><strong>Logistic Regression</strong>: Binary classification (e.g., spam detection).</li>
+                            <li><strong>SVM</strong>: High-dimensional classification (90% accuracy in text tasks).</li>
+                            <li><strong>Random Forest</strong>: Ensemble method for robust predictions.</li>
+                            <li><strong>Feature Engineering</strong>: Creating features for better models.</li>
+                            <li><strong>Regularization</strong>: L1 and L2 for preventing overfitting.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Real Estate</strong>: Predicting property values with regression.</li>
+                            <li><strong>Email</strong>: Spam filtering with logistic regression.</li>
+                            <li><strong>Healthcare</strong>: Disease classification with SVM.</li>
+                            <li><strong>Finance</strong>: Credit scoring with Random Forest.</li>
+                            <li><strong>Marketing</strong>: Customer segmentation with classification.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes strengthen predictive modeling.</p>
+                    </div>
+                `
+            },
+            'deep-learning': {
+                title: 'Deep Learning',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Explore neural networks and deep learning for advanced data science applications.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Neural Networks</strong>: Layers for complex patterns (95% accuracy in image tasks).</li>
+                            <li><strong>CNNs</strong>: Convolutional Neural Networks for image processing.</li>
+                            <li><strong>RNNs</strong>: Recurrent Neural Networks for sequential data.</li>
+                            <li><strong>Frameworks</strong>: TensorFlow, PyTorch for model building.</li>
+                            <li><strong>Transfer Learning</strong>: Using pre-trained models like BERT.</li>
+                            <li><strong>Optimization</strong>: Backpropagation and gradient descent.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Vision</strong>: Image classification with CNNs.</li>
+                            <li><strong>NLP</strong>: Sentiment analysis with RNNs.</li>
+                            <li><strong>Healthcare</strong>: Medical image analysis with deep learning.</li>
+                            <li><strong>Autonomous Vehicles</strong>: Object detection with YOLO.</li>
+                            <li><strong>Chatbots</strong>: Building conversational AI with BERT.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes advance deep learning expertise.</p>
+                    </div>
+                `
+            },
+            'model-evaluation': {
+                title: 'Model Evaluation & Tuning',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Learn to evaluate and optimize machine learning models for better performance.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Metrics</strong>: Accuracy, precision, recall, F1-score (85% accuracy in fraud detection).</li>
+                            <li><strong>Cross-Validation</strong>: K-fold CV for robust evaluation.</li>
+                            <li><strong>Hyperparameter Tuning</strong>: Grid search, random search, Bayesian optimization.</li>
+                            <li><strong>Overfitting</strong>: Techniques to prevent model memorization.</li>
+                            <li><strong>Confusion Matrix</strong>: Visualizing classification performance.</li>
+                            <li><strong>ROC/AUC</strong>: Measuring model performance for imbalanced data.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Finance</strong>: Evaluating fraud detection with precision.</li>
+                            <li><strong>Healthcare</strong>: Tuning diagnostic models with CV.</li>
+                            <li><strong>E-commerce</strong>: Optimizing recommendation systems.</li>
+                            <li><strong>Marketing</strong>: Assessing campaign models with ROC.</li>
+                            <li><strong>Retail</strong>: Improving demand forecasting accuracy.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes improve model performance.</p>
+                    </div>
+                `
+            },
+            'python-libraries': {
+                title: 'Python Libraries',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Master essential Python libraries for efficient data science workflows.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Pandas</strong>: Data manipulation with dataframes (90% of data projects).</li>
+                            <li><strong>NumPy</strong>: Numerical operations with arrays.</li>
+                            <li><strong>Scikit-learn</strong>: Machine learning algorithms and pipelines.</li>
+                            <li><strong>Matplotlib/Seaborn</strong>: Visualization tools for plotting.</li>
+                            <li><strong>Statsmodels</strong>: Statistical modeling and hypothesis testing.</li>
+                            <li><strong>XGBoost</strong>: High-performance gradient boosting.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Data Analysis</strong>: Aggregating data with Pandas.</li>
+                            <li><strong>Machine Learning</strong>: Building models with Scikit-learn.</li>
+                            <li><strong>Visualization</strong>: Creating plots with Seaborn.</li>
+                            <li><strong>Research</strong>: Statistical tests with Statsmodels.</li>
+                            <li><strong>Competitions</strong>: Winning Kaggle with XGBoost.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes boost Python proficiency.</p>
+                    </div>
+                `
+            },
+            'sql-databases': {
+                title: 'SQL & Databases',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Use SQL and relational databases for efficient data management and querying.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>SQL Queries</strong>: SELECT, JOIN, GROUP BY for data retrieval.</li>
+                            <li><strong>Relational Databases</strong>: PostgreSQL, MySQL (used by 60% of enterprises).</li>
+                            <li><strong>Indexing</strong>: Optimizing query performance.</li>
+                            <li><strong>Normalization</strong>: Reducing data redundancy.</li>
+                            <li><strong>Aggregation</strong>: COUNT, SUM, AVG for summaries.</li>
+                            <li><strong>Window Functions</strong>: Advanced analytics with ROW_NUMBER, RANK.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Business Intelligence</strong>: Querying sales data with SQL.</li>
+                            <li><strong>E-commerce</strong>: Managing product databases with MySQL.</li>
+                            <li><strong>Finance</strong>: Aggregating transactions for reports.</li>
+                            <li><strong>Healthcare</strong>: Querying patient data with PostgreSQL.</li>
+                            <li><strong>Analytics</strong>: Using window functions for rankings.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes enhance database skills.</p>
+                    </div>
+                `
+            },
+            'big-data': {
+                title: 'Big Data Technologies',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Learn tools like Hadoop, Spark, and Kafka for processing massive datasets.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Hadoop</strong>: Distributed storage with HDFS and MapReduce.</li>
+                            <li><strong>Spark</strong>: In-memory processing (100x faster than Hadoop).</li>
+                            <li><strong>Kafka</strong>: Real-time data streaming for analytics.</li>
+                            <li><strong>Data Lakes</strong>: Storing unstructured data for analysis.</li>
+                            <li><strong>Scalability</strong>: Handling petabytes of data.</li>
+                            <li><strong>Data Pipelines</strong>: Automating data flows with Airflow.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>E-commerce</strong>: Real-time analytics with Spark.</li>
+                            <li><strong>Finance</strong>: Fraud detection with Kafka streams.</li>
+                            <li><strong>IoT</strong>: Processing sensor data with Hadoop.</li>
+                            <li><strong>Social Media</strong>: Analyzing user data with data lakes.</li>
+                            <li><strong>Logistics</strong>: Optimizing pipelines with Airflow.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes tackle big data challenges.</p>
+                    </div>
+                `
+            },
+            'cloud-platforms': {
+                title: 'Cloud Platforms',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Leverage cloud platforms for scalable data science solutions.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>AWS</strong>: S3 for storage, SageMaker for ML (70% of cloud ML projects).</li>
+                            <li><strong>Azure</strong>: Synapse Analytics for big data.</li>
+                            <li><strong>Google Cloud</strong>: BigQuery for large-scale querying.</li>
+                            <li><strong>Scalability</strong>: Elastic compute for dynamic workloads.</li>
+                            <li><strong>Cost Management</strong>: Optimizing cloud resource usage.</li>
+                            <li><strong>Serverless</strong>: Lambda and Cloud Functions for automation.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Machine Learning</strong>: Training models with SageMaker.</li>
+                            <li><strong>Big Data</strong>: Querying with BigQuery.</li>
+                            <li><strong>Analytics</strong>: Real-time dashboards with Azure Synapse.</li>
+                            <li><strong>Storage</strong>: Managing datasets with AWS S3.</li>
+                            <li><strong>Automation</strong>: Serverless workflows with Lambda.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes enable cloud-based data science.</p>
+                    </div>
+                `
+            },
+            'time-series': {
+                title: 'Time Series Analysis',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Analyze temporal data to forecast trends and patterns.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>ARIMA</strong>: Autoregressive models for time series forecasting.</li>
+                            <li><strong>LSTM</strong>: Long Short-Term Memory for sequential data.</li>
+                            <li><strong>Prophet</strong>: Facebook’s tool for scalable forecasting.</li>
+                            <li><strong>Stationarity</strong>: Ensuring data stability for modeling.</li>
+                            <li><strong>Seasonality</strong>: Handling recurring patterns in data.</li>
+                            <li><strong>Decomposition</strong>: Breaking down time series into trend, seasonality, and noise.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Finance</strong>: Stock price prediction with ARIMA.</li>
+                            <li><strong>Retail</strong>: Demand forecasting with Prophet.</li>
+                            <li><strong>Energy</strong>: Predicting consumption with LSTM.</li>
+                            <li><strong>Weather</strong>: Forecasting trends with time series models.</li>
+                            <li><strong>Logistics</strong>: Optimizing supply chains with seasonality analysis.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes master time series analysis.</p>
+                    </div>
+                `
+            },
+            'nlp': {
+                title: 'Natural Language Processing',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Process and analyze text data for advanced applications.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Tokenization</strong>: Breaking text into words or phrases.</li>
+                            <li><strong>Sentiment Analysis</strong>: Determining text sentiment (e.g., 85% accuracy in reviews).</li>
+                            <li><strong>BERT</strong>: Transformer model for contextual understanding.</li>
+                            <li><strong>Word Embeddings</strong>: Word2Vec, GloVe for vector representations.</li>
+                            <li><strong>Text Preprocessing</strong>: Stemming, lemmatization, stop words.</li>
+                            <li><strong>NER</strong>: Named Entity Recognition for extracting entities.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Customer Service</strong>: Chatbots with BERT.</li>
+                            <li><strong>Marketing</strong>: Sentiment analysis of social media.</li>
+                            <li><strong>Healthcare</strong>: Extracting entities from medical reports.</li>
+                            <li><strong>Search Engines</strong>: Improving results with embeddings.</li>
+                            <li><strong>Legal</strong>: Document classification with NLP models.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes advance NLP expertise.</p>
+                    </div>
+                `
+            },
+            'computer-vision': {
+                title: 'Computer Vision',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Build systems to interpret and analyze visual data.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>OpenCV</strong>: Library for image processing tasks.</li>
+                            <li><strong>YOLO</strong>: Real-time object detection (95% accuracy in some tasks).</li>
+                            <li><strong>CNNs</strong>: Convolutional Neural Networks for image analysis.</li>
+                            <li><strong>Image Preprocessing</strong>: Resizing, normalizing, augmenting images.</li>
+                            <li><strong>Feature Extraction</strong>: Identifying key image features.</li>
+                            <li><strong>Transfer Learning</strong>: Using pre-trained models like ResNet.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Security</strong>: Facial recognition with OpenCV.</li>
+                            <li><strong>Autonomous Vehicles</strong>: Object detection with YOLO.</li>
+                            <li><strong>Healthcare</strong>: Medical imaging with CNNs.</li>
+                            <li><strong>Retail</strong>: Visual product search with feature extraction.</li>
+                            <li><strong>Agriculture</strong>: Crop monitoring with image analysis.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes enhance computer vision skills.</p>
+                    </div>
+                `
+            },
+            'reinforcement-learning': {
+                title: 'Reinforcement Learning',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Develop intelligent agents that learn through rewards and actions.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Q-Learning</strong>: Learning optimal actions via rewards.</li>
+                            <li><strong>Deep Q-Networks</strong>: Combining Q-learning with neural networks.</li>
+                            <li><strong>Policy Gradients</strong>: Optimizing actions with gradient ascent.</li>
+                            <li><strong>Markov Decision Processes</strong>: Modeling decision-making environments.</li>
+                            <li><strong>Exploration vs. Exploitation</strong>: Balancing learning and action.</li>
+                            <li><strong>Gym</strong>: OpenAI’s toolkit for RL environments.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Gaming</strong>: Building AI for games with Q-learning.</li>
+                            <li><strong>Robotics</strong>: Training robots with Deep Q-Networks.</li>
+                            <li><strong>Finance</strong>: Portfolio optimization with RL.</li>
+                            <li><strong>Logistics</strong>: Optimizing delivery routes with policy gradients.</li>
+                            <li><strong>Healthcare</strong>: Personalized treatment plans with RL.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes advance RL expertise.</p>
+                    </div>
+                `
+            },
+            'kaggle-datasets': {
+                title: 'Kaggle & Datasets',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Access datasets and compete in challenges on Kaggle to build practical skills.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Kaggle</strong>: Platform for datasets and competitions (2M+ users).</li>
+                            <li><strong>Datasets</strong>: Public datasets like Titanic for practice.</li>
+                            <li><strong>Competitions</strong>: Solve real-world problems with ML.</li>
+                            <li><strong>Notebooks</strong>: Share code with Jupyter notebooks.</li>
+                            <li><strong>Learning Path</strong>: Progress from beginner to expert challenges.</li>
+                            <li><strong>APIs</strong>: Accessing Kaggle data programmatically.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Practice</strong>: Predicting survival on Titanic dataset.</li>
+                            <li><strong>Competitions</strong>: Competing in image classification challenges.</li>
+                            <li><strong>Collaboration</strong>: Sharing notebooks with the community.</li>
+                            <li><strong>Portfolio</strong>: Building projects for job applications.</li>
+                            <li><strong>Research</strong>: Exploring datasets for academic projects.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes promote hands-on learning.</p>
+                    </div>
+                `
+            },
+            'online-courses': {
+                title: 'Online Courses',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Explore structured learning through online courses on various platforms.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Coursera</strong>: Courses like “Machine Learning” by Andrew Ng (4M+ enrollments).</li>
+                            <li><strong>edX</strong>: Data science programs from MIT, Harvard.</li>
+                            <li><strong>Udemy</strong>: Practical courses like “Python for Data Science.”</li>
+                            <li><strong>Certifications</strong>: Credentials for career advancement.</li>
+                            <li><strong>Hands-on Labs</strong>: Practice with real datasets.</li>
+                            <li><strong>Specializations</strong>: Deep dives into ML, AI, and analytics.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Skill Building</strong>: Learning ML with Coursera.</li>
+                            <li><strong>Career Growth</strong>: Earning data science certificates.</li>
+                            <li><strong>Projects</strong>: Building portfolios with Udemy courses.</li>
+                            <li><strong>Research</strong>: Advanced analytics with edX programs.</li>
+                            <li><strong>Upskilling</strong>: Specializations for career transitions.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes guide structured learning.</p>
+                    </div>
+                `
+            },
+                        'communities': {
+                title: 'Data Science Communities',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Join vibrant data science communities to collaborate, share knowledge, and grow your skills.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Reddit</strong>: Engage in r/datascience (500k+ members).</li>
+                            <li><strong>Kaggle Forums</strong>: Discuss datasets and competitions.</li>
+                            <li><strong>Stack Overflow</strong>: Get coding help for data science queries.</li>
+                            <li><strong>Meetups</strong>: Local and virtual events for networking.</li>
+                            <li><strong>Slack/Discord</strong>: Join data science groups for real-time chats.</li>
+                            <li><strong>Conferences</strong>: Attend events like PyData and ODSC.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Collaboration</strong>: Share projects on Kaggle forums.</li>
+                            <li><strong>Problem-Solving</strong>: Ask questions on Stack Overflow.</li>
+                            <li><strong>Networking</strong>: Connect with professionals at meetups.</li>
+                            <li><strong>Learning</strong>: Gain insights from Reddit discussions.</li>
+                            <li><strong>Career Growth</strong>: Present at conferences like PyData.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes foster community engagement.</p>
+                    </div>
+                `
+            },
+            'books': {
+                title: 'Recommended Books',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Deepen your data science knowledge with top-tier books recommended by experts.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Books</h4>
+                        <ul class="detail-list">
+                            <li><strong>"Python for Data Analysis"</strong>: Wes McKinney’s guide to Pandas (used by 80% of data scientists).</li>
+                            <li><strong>"Introduction to Statistical Learning"</strong>: Comprehensive ML theory with R.</li>
+                            <li><strong>"Deep Learning"</strong>: Goodfellow’s book on neural networks.</li>
+                            <li><strong>"Data Science for Business"</strong>: Practical insights for non-technical roles.</li>
+                            <li><strong>"The Elements of Statistical Learning"</strong>: Advanced statistical modeling.</li>
+                            <li><strong>"Hands-On Machine Learning"</strong>: Practical ML with Scikit-learn and TensorFlow.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Coding</strong>: Learn Pandas with "Python for Data Analysis."</li>
+                            <li><strong>Theory</strong>: Master ML concepts with ISLR.</li>
+                            <li><strong>Deep Learning</strong>: Build neural networks with Goodfellow’s book.</li>
+                            <li><strong>Business</strong>: Apply insights from "Data Science for Business."</li>
+                            <li><strong>Advanced</strong>: Tackle complex models with ESL.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes guide your reading journey.</p>
+                    </div>
+                `
+            },
+            'data-analyst': {
+                title: 'Data Analyst',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Learn the skills to interpret data and drive business decisions as a data analyst.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Data Cleaning</strong>: Prepare datasets for analysis (70% of analyst time).</li>
+                            <li><strong>Visualization</strong>: Create dashboards with Tableau or Power BI.</li>
+                            <li><strong>SQL</strong>: Query databases for insights.</li>
+                            <li><strong>Excel</strong>: Advanced techniques like pivot tables and VLOOKUP.</li>
+                            <li><strong>Statistics</strong>: Descriptive stats for summarizing data.</li>
+                            <li><strong>Reporting</strong>: Communicate findings to stakeholders.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Business</strong>: Analyze sales trends with dashboards.</li>
+                            <li><strong>Marketing</strong>: Measure campaign performance with SQL.</li>
+                            <li><strong>Finance</strong>: Budget analysis with Excel.</li>
+                            <li><strong>E-commerce</strong>: Customer segmentation with visualization.</li>
+                            <li><strong>Operations</strong>: Optimize processes with data insights.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes prepare you for a data analyst career.</p>
+                    </div>
+                `
+            },
+            'data-scientist': {
+                title: 'Data Scientist',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Build predictive models and uncover insights as a data scientist.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Machine Learning</strong>: Build models with Scikit-learn (80% of data scientists use ML).</li>
+                            <li><strong>Statistics</strong>: Hypothesis testing and probability.</li>
+                            <li><strong>Programming</strong>: Python or R for data analysis.</li>
+                            <li><strong>Feature Engineering</strong>: Create predictive features.</li>
+                            <li><strong>Visualization</strong>: Communicate insights with plots.</li>
+                            <li><strong>Domain Knowledge</strong>: Apply insights to specific industries.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Healthcare</strong>: Predict diseases with ML models.</li>
+                            <li><strong>Finance</strong>: Fraud detection with anomaly detection.</li>
+                            <li><strong>Retail</strong>: Recommendation systems with ML.</li>
+                            <li><strong>Marketing</strong>: Customer churn prediction.</li>
+                            <li><strong>Energy</strong>: Optimize consumption with predictive models.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes launch data science careers.</p>
+                    </div>
+                `
+            },
+            'ml-engineer': {
+                title: 'Machine Learning Engineer',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Design and deploy scalable machine learning systems for production.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Model Deployment</strong>: Serve models with Flask or FastAPI.</li>
+                            <li><strong>Scalability</strong>: Optimize models for large-scale data (90% of ML jobs require this).</li>
+                            <li><strong>MLOps</strong>: Automate pipelines with Kubeflow or MLflow.</li>
+                            <li><strong>Cloud</strong>: Deploy models on AWS SageMaker or Azure.</li>
+                            <li><strong>Monitoring</strong>: Track model performance in production.</li>
+                            <li><strong>Software Engineering</strong>: Write production-ready code.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Tech</strong>: Deploy recommendation systems on cloud.</li>
+                            <li><strong>Finance</strong>: Real-time fraud detection with MLOps.</li>
+                            <li><strong>Healthcare</strong>: Scalable diagnostic models.</li>
+                            <li><strong>E-commerce</strong>: Personalization with deployed models.</li>
+                            <li><strong>Autonomous Systems</strong>: Real-time object detection.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes advance ML engineering skills.</p>
+                    </div>
+                `
+            },
+            'data-engineer': {
+                title: 'Data Engineer',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Build robust data pipelines and infrastructure for large-scale data processing.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Data Pipelines</strong>: Automate data flows with Airflow (used by 60% of enterprises).</li>
+                            <li><strong>ETL</strong>: Extract, Transform, Load processes.</li>
+                            <li><strong>Big Data</strong>: Process data with Spark or Hadoop.</li>
+                            <li><strong>Cloud Storage</strong>: Use AWS S3 or Google Cloud Storage.</li>
+                            <li><strong>Databases</strong>: Manage SQL and NoSQL databases.</li>
+                            <li><strong>Scalability</strong>: Handle petabytes of data efficiently.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>E-commerce</strong>: Build pipelines for customer data.</li>
+                            <li><strong>Finance</strong>: Process transactions with Spark.</li>
+                            <li><strong>Healthcare</strong>: Manage patient data with ETL.</li>
+                            <li><strong>Social Media</strong>: Store user data in NoSQL databases.</li>
+                            <li><strong>Logistics</strong>: Optimize supply chains with pipelines.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated under the guidance of Miss Fathia Shodipe, a student of the University of Ilorin, these notes empower data engineering.</p>
+                    </div>
+                `
+            }
+        };
+
+        function cycleTheme() {
+            const themes = ['day', 'night', 'twilight', 'aurora'];
+            const body = document.body;
+            let currentThemeIndex = themes.indexOf(body.getAttribute('data-theme'));
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            body.setAttribute('data-theme', themes[currentThemeIndex]);
+            const toggle = document.querySelector('.mode-toggle i');
+            toggle.className = 'fas ' + (themes[currentThemeIndex] === 'day' ? 'fa-sun' :
+                                       themes[currentThemeIndex] === 'night' ? 'fa-moon' :
+                                       themes[currentThemeIndex] === 'twilight' ? 'fa-star' : 'fa-aurora');
+        }
+
+        function toggleDetail(knowledgeId) {
+            const overlay = document.getElementById('detailOverlay');
+            const detailTitle = document.getElementById('detailTitle');
+            const detailContent = document.getElementById('detailContent');
+            const detailContainer = document.getElementById('detailContainer');
+
+            if (knowledgeDetails[knowledgeId]) {
+                detailTitle.innerHTML = knowledgeDetails[knowledgeId].title;
+                detailContent.innerHTML = knowledgeDetails[knowledgeId].content;
+                overlay.style.display = 'flex';
+                detailContainer.scrollTop = 0; // Ensure container opens scrolled to the top
+            }
+        }
+
+        function closeDetail() {
+            const overlay = document.getElementById('detailOverlay');
+            overlay.style.display = 'none';
+        }
+
+        // Star and Particle Animation
+        function createStarsAndParticles() {
+            const starsContainer = document.getElementById('stars');
+            const particlesContainer = document.getElementById('particles');
+            const starCount = 100;
+            const particleCount = 20;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                const size = Math.random() < 0.3 ? 'small-star' : Math.random() < 0.7 ? 'medium-star' : 'large-star';
+                star.className = `star ${size}`;
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.top = `${Math.random() * 100}vh`;
+                star.style.animationDelay = `${Math.random() * 3}s`;
+                starsContainer.appendChild(star);
+            }
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'data-particle';
+                particle.style.width = `${Math.random() * 4 + 2}px`;
+                particle.style.height = particle.style.width;
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Set footer year
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+        // Initialize stars and particles
+        window.onload = createStarsAndParticles;
+    </script>
+</body>
+</html>
